@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>设计师产值计算器</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>设计师产值计算器</h1>
+    <p class="desc">根据你提供的“字牌产值图（2024.03）+ 印刷部产值计算（2024.04）”做了可直接录单统计的版本。</p>
+
+    <section class="card">
+      <h2>1) 新增产值条目</h2>
+      <div class="form-grid">
+        <label>
+          分类
+          <select id="categorySelect"></select>
+        </label>
+
+        <label>
+          项目
+          <select id="itemSelect"></select>
+        </label>
+
+        <label>
+          数量
+          <input id="qtyInput" type="number" min="1" value="1" />
+        </label>
+
+        <label>
+          单价(欧产值)
+          <input id="priceInput" type="number" min="0" step="1" />
+        </label>
+
+        <label>
+          调整(%)
+          <input id="adjustInput" type="number" step="1" value="0" />
+        </label>
+
+        <label>
+          备注
+          <input id="noteInput" type="text" placeholder="如：老稿修改、外来文件" />
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="addBtn">添加条目</button>
+        <button id="clearBtn" class="secondary">清空列表</button>
+      </div>
+      <p class="tip">说明：调整(%)可输入负数。比如“老稿太旧重排 -20%”可填 -20。</p>
+    </section>
+
+    <section class="card">
+      <h2>2) 本月提成设置</h2>
+      <div class="form-grid">
+        <label>
+          月目标产值
+          <input id="targetInput" type="number" min="0" value="800" />
+        </label>
+        <label>
+          基础提成率(%)
+          <input id="rateInput" type="number" min="0" step="0.1" value="4" />
+        </label>
+        <label>
+          超目标倍数
+          <input id="doubleInput" type="number" min="1" step="0.1" value="2" />
+        </label>
+        <label>
+          保底(元)
+          <input id="baseInput" type="number" min="0" value="1600" />
+        </label>
+        <label>
+          小组长补贴(元)
+          <input id="leaderInput" type="number" min="0" value="400" />
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) 条目明细</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>分类/项目</th>
+            <th>数量</th>
+            <th>单价</th>
+            <th>调整</th>
+            <th>小计</th>
+            <th>备注</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="entriesBody"></tbody>
+      </table>
+    </section>
+
+    <section class="card result">
+      <h2>4) 汇总</h2>
+      <div id="resultText"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
